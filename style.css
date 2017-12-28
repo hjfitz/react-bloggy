@@ -1,3 +1,20 @@
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+main.container {
+  flex: 1;
+}
+
+.page-footer {
+  padding: 0;
+}
+
+footer>.container {
+  padding: 20px 0;
+}
+
 ul.collection.nav > .collection-item {
   cursor: pointer;
 }

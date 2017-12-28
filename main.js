@@ -38,11 +38,11 @@ class Article extends React.Component {
     const navProps = { callback: this.renderMarkdown, key: 'nav' }
 
     // create react elements
-    const entry = React.createElement('div', entryProps , null);
+    const entry = React.createElement('article', entryProps , null);
     const nav = React.createElement(Navigation, navProps , null);
 
     // render those elements within a div
-    const container = React.createElement('div', { className: 'container' } , [ nav, entry ]);
+    const container = React.createElement('div', null , [ nav, entry ]);
     return container;
   }
 }
