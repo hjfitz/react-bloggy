@@ -9,12 +9,24 @@ class Article extends React.Component {
     super(props);
     // set to a placeholder soon
     this.state = { url: '' };
+    // set up an instance of marked
+    this.renderer = new marked.Renderer();
+    
+    // add custom classes to parsed elements
+    this.renderer.list = (body, ordered) => 
+      ordered 
+        ? `<ol>${body}</ol>` 
+        : `<ul class="collection">${body}</ul>`;
+  
+    this.renderer.listitem = text => `<li class="collection-item">${text}</li>`;
+
     this.renderMarkdown = this.renderMarkdown.bind(this);
   }
 
   async renderMarkdown(url) {
+    const { renderer } = this;
     const entry = await fetch(url).then(resp => resp.text());
-    const md = marked(entry);
+    const md = marked(entry, { renderer });
     this.setState({ md });
   }
 
@@ -52,7 +64,7 @@ class Navigation extends React.Component {
         url: download_url,
       })).map(({ url, name }) => {
         const onClick = () => this.props.callback(url);
-        const listItem = React.createElement('li', { key: url, onClick }, name);
+        const listItem = React.createElement('li', { className: 'collection-item', key: url, onClick }, name);
         return listItem;
     });
 
@@ -64,7 +76,7 @@ class Navigation extends React.Component {
     // pull nav out of state to avoid and 'this' fuckery
     const { nav } = this.state;
     // put the items in a list
-    const list = React.createElement('ul', null, nav);
+    const list = React.createElement('ul', { className: 'collection nav' }, nav);
     return list;
   }
 }

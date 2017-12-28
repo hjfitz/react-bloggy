@@ -1,0 +1,7 @@
+ul.collection.nav > .collection-item {
+  cursor: pointer;
+}
+
+ul.collection.nav > .collection-item:hover {
+  background-color: lightgray;
+}
