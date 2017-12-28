@@ -3,7 +3,7 @@ const entry = document.getElementById('react');
 
 // get the contents of a file
 // TODO: point this to the repos 'entries' folder
-const getNav = () => fetch('https://api.github.com/repos/hjfitz/contentful-redis/contents').then(resp => resp.json());
+const getNav = () => fetch('https://api.github.com/repos/hjfitz/react-bloggy/entries/contents').then(resp => resp.json());
 
 class Article extends React.Component {
   constructor(props) {
