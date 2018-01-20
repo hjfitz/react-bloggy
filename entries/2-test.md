@@ -1,3 +1,15 @@
-# Test
-
-This is a test entry for images
+## Todo monday morning:
+- Slide with entire roadmap
+- Append examples to each tag
+- Begin session
+  - Explain objectives
+  - Push everyone to go to codepen to experiment during talk
+  - Show outcomes on codepen
+- Begin explaining tags
+  - Example in slides
+  - Example with normal tags
+  - Use chat app to ensure everyone understands
+- Move on to difficult tags
+  - Ensure example on codepen
+  - Chat app to ensure everyone understands
+- 'on to you'. Go around and help
