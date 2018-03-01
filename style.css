@@ -15,7 +15,7 @@ body {
 }
 
 main {
-  flex: 1;
+  flex: 1 1 auto;
   display: flex;
   flex-direction: column;
   margin: 0 auto;
@@ -38,7 +38,7 @@ header, footer {
 }
 
 main > article {
-  flex: 1;
+  flex: 1 1 auto;
 }
 
 article * {
@@ -49,8 +49,29 @@ article p {
   font-size: 16px;
 }
 
-article code {
+article code, article code * {
   font-family: var(--mono);
+}
+
+.blog-header {
+  font-weight: 600;
+}
+
+
+.image-modal {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0,0,0,0.6);
+}
+
+.image-modal > img {
+  max-width: 90vw;
 }
 
 article h1, article h2, article h3 {
@@ -61,6 +82,12 @@ article h1, article h2, article h3 {
 
 ::selection {
   background: var(--accent);
+}
+
+img {
+  max-width: 100%;
+  display: block;
+  margin: 0 auto;
 }
 
 @media screen and (max-width: 560px) {

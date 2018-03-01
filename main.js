@@ -1,18 +1,19 @@
 // where we're going to render our react
 const entry = document.getElementById('react');
+hljs.initHighlightingOnLoad();
 
 // get all of the bloggy entries
 const getNav = () => fetch('https://api.github.com/repos/hjfitz/react-bloggy/contents/entries').then(resp => resp.json());
 
 const capitalise = word => word.charAt(0).toUpperCase() + word.substring(1);
 
-const parseName = name => name.replace('.md', '').replace('-', ' ').split(' ').map(capitalise).join(' ');
+const parseName = name => name.replace('.md', '').replace(/-/gi, ' ').split(' ').map(capitalise).join(' ');
 
 class Article extends React.Component {
   constructor(props) {
     super(props);
     // set to a placeholder soon
-    this.state = { url: '' };
+    this.state = { url: '', title: 'Welcome' };
     // set up an instance of marked
     this.renderer = new marked.Renderer();
     
@@ -27,26 +28,58 @@ class Article extends React.Component {
     this.renderMarkdown = this.renderMarkdown.bind(this);
   }
 
-  async renderMarkdown(url) {
+  componentDidUpdate() {
+    document.querySelectorAll('code').forEach(block => {
+      if (block.classList.length) {
+        hljs.highlightBlock(block);
+      }
+    });
+    document.querySelectorAll('img').forEach(image => {
+      image.addEventListener('click', ev => {
+        document.body.style.overflow = 'hidden';
+        const { src } = image;
+      
+        // create our dom elements
+        const div = document.createElement('div');
+        const img = document.createElement('img');
+
+        // configure the modal overlay
+        div.addEventListener('click', () => {
+          div.parentElement.removeChild(div);
+          document.body.style.overflow = 'auto';
+        });
+        div.className = 'image-modal';
+        div.appendChild(img);
+
+        // load the image and put the moal on to the doc
+        img.src = src;
+        document.body.appendChild(div);
+      });
+  });
+
+  }
+
+  async renderMarkdown(url, title) {
     const { renderer } = this;
     const entry = await fetch(url).then(resp => resp.text());
     const md = marked(entry, { renderer });
-    this.setState({ md });
+    this.setState({ md, title });
   }
 
   render() {
-    const { md } = this.state;
+    const { md, title } = this.state;
     // set inner HTML to parsed md
     const entryProps = { dangerouslySetInnerHTML: { __html: md }, key: 'entry' };
     // create a callback handler for navigation click
     const navProps = { callback: this.renderMarkdown, key: 'nav' };
 
     // create react elements
+    const header = React.createElement('h1', { className: 'blog-header' }, parseName(title).substring(1).trim());
     const entry = React.createElement('article', entryProps , null);
     const nav = React.createElement(Navigation, navProps , null);
 
     // react16 allows us to return a list, not items in a <div>
-    if (md) return [entry, nav];
+    if (md) return [header, entry, nav];
     return nav;
   }
 }
@@ -64,7 +97,7 @@ class Navigation extends React.Component {
     const files = await getNav();
     const nav = files
       .map(({ name, download_url }) => {
-        const onClick = () => this.props.callback(download_url);
+        const onClick = () => this.props.callback(download_url, name);
         const props = { key: download_url, onClick };
         const listItem = React.createElement('li', props, parseName(name));
         return listItem;
