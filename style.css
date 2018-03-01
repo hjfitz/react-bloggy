@@ -4,6 +4,7 @@
   --serif: 'Lora', serif;
   --accent: #cfd8dc;
   --hyper: #0091ea;
+  --text: #212121;
 }
 
 body {
@@ -11,7 +12,7 @@ body {
   flex-direction: column;
   margin: 0;
   font-family: var(--sans);
-  color: #212121;
+  color: var(--text);
 }
 
 main {
