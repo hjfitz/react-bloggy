@@ -55,8 +55,7 @@ class Article extends React.Component {
         img.src = src;
         document.body.appendChild(div);
       });
-  });
-
+    });
   }
 
   async renderMarkdown(url, title) {
@@ -76,7 +75,10 @@ class Article extends React.Component {
     // create react elements
     const header = React.createElement('h1', { className: 'blog-header' }, parseName(title).substring(1).trim());
     const entry = React.createElement('article', entryProps , null);
-    const nav = React.createElement(Navigation, navProps , null);
+    const nav = [
+      React.createElement('h1', null, 'Navigation'),
+      React.createElement(Navigation, navProps , null)
+    ];
 
     // react16 allows us to return a list, not items in a <div>
     if (md) return [header, entry, nav];
