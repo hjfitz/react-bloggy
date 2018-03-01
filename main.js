@@ -50,10 +50,12 @@ class Article extends React.Component {
         });
         div.className = 'image-modal';
         div.appendChild(img);
-
+        
         // load the image and put the moal on to the doc
         img.src = src;
-        document.body.appendChild(div);
+        if (!document.querySelectorAll('.image-modal').length) {
+          document.body.appendChild(div);
+        }
       });
     });
   }
