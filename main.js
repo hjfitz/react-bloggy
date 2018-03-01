@@ -4,6 +4,10 @@ const entry = document.getElementById('react');
 // get all of the bloggy entries
 const getNav = () => fetch('https://api.github.com/repos/hjfitz/react-bloggy/contents/entries').then(resp => resp.json());
 
+const capitalise = word => word.charAt(0).toUpperCase() + word.substring(1);
+
+const parseName = name => name.replace('.md', '').replace('-', ' ').split(' ').map(capitalise).join(' ');
+
 class Article extends React.Component {
   constructor(props) {
     super(props);
@@ -33,17 +37,17 @@ class Article extends React.Component {
   render() {
     const { md } = this.state;
     // set inner HTML to parsed md
-    const entryProps = { dangerouslySetInnerHTML: { __html: md }, key: 'article' }
+    const entryProps = { dangerouslySetInnerHTML: { __html: md }, key: 'entry' };
     // create a callback handler for navigation click
-    const navProps = { callback: this.renderMarkdown, key: 'nav' }
+    const navProps = { callback: this.renderMarkdown, key: 'nav' };
 
     // create react elements
     const entry = React.createElement('article', entryProps , null);
     const nav = React.createElement(Navigation, navProps , null);
 
-    // render those elements within a div
-    const container = React.createElement('div', null , [ nav, entry ]);
-    return container;
+    // react16 allows us to return a list, not items in a <div>
+    if (md) return [entry, nav];
+    return nav;
   }
 }
 
@@ -59,14 +63,15 @@ class Navigation extends React.Component {
   async componentDidMount() {
     const files = await getNav();
     const nav = files
-      .map(({ name, download_url }) => ({
-        name: name,
-        url: download_url,
-      })).map(({ url, name }) => {
-        const onClick = () => this.props.callback(url);
-        const listItem = React.createElement('li', { className: 'collection-item', key: url, onClick }, name);
+      .map(({ name, download_url }) => {
+        const onClick = () => this.props.callback(download_url);
+        const props = { key: download_url, onClick };
+        const listItem = React.createElement('li', props, parseName(name));
         return listItem;
     });
+
+    // render the most recent article
+    nav[nav.length - 1].props.onClick()
 
     // set state to cause a re-render
     this.setState({ nav });
@@ -76,10 +81,9 @@ class Navigation extends React.Component {
     // pull nav out of state to avoid and 'this' fuckery
     const { nav } = this.state;
     // put the items in a list
-    const list = React.createElement('ul', { className: 'collection nav' }, nav);
-    return list;
+    const list = React.createElement('ul', null, nav);
+    return React.createElement('nav', null, list);
   }
 }
 
-// render the nav (temporarily)
-ReactDOM.render(React.createElement(Article, null, null), entry);
+ReactDOM.render(React.createElement(Article), entry);

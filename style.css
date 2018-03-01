@@ -1,24 +1,71 @@
+:root {
+  --sans:  'Source Sans Pro', sans-serif;
+  --mono:  'Ubuntu Mono', monospace;
+  --serif: 'Lora', serif;
+  --accent: #cfd8dc;
+  --hyper: #0091ea;
+}
+
 body {
   display: flex;
   flex-direction: column;
+  margin: 0;
+  font-family: var(--sans);
+  color: #212121;
 }
 
-main.container {
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  max-width: 70%;
+  width: 70%;
+}
+
+a, a:visited {
+  color: var(--hyper);
+  text-decoration: none;
+}
+
+footer {
+  display: flex;
+  justify-content: space-between;
+}
+
+header, footer {
+  margin: 1% 5%;
+}
+
+main > article {
   flex: 1;
 }
 
-.page-footer {
-  padding: 0;
+article * {
+  font-family: var(--serif);
 }
 
-footer>.container {
-  padding: 20px 0;
+article p {
+  font-size: 16px;
 }
 
-ul.collection.nav > .collection-item {
-  cursor: pointer;
+article code {
+  font-family: var(--mono);
 }
 
-ul.collection.nav > .collection-item:hover {
-  background-color: lightgray;
+article h1, article h2, article h3 {
+  font-family: var(--sans);
+  border-bottom: 1px solid var(--accent);
+  width: fit-content;
+}
+
+::selection {
+  background: var(--accent);
+}
+
+@media screen and (max-width: 560px) {
+  main {
+    max-width: 85%;
+    width: 85%;
+  }
 }
