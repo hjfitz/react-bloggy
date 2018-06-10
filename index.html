@@ -1,38 +1,52 @@
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    <meta name="theme-color" content="#263238"/>
+    <link rel="manifest" href="/manifest.json" />
+
+
     <title>Bloggy</title>
+
+    <!-- stylesheets -->
     <link rel="stylesheet" href="style.css">     
-    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
-    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
-    <!-- marked, for parsing markdown from github -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.9/marked.min.js"></script>
-    <link href="https://fonts.googleapis.com/css?family=Lora|Source+Sans+Pro:400,600|Ubuntu+Mono" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/arta.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-    <body>
-
-
-  <header>
-    <h1>Bloggo</h1>
-  </header>
-
-
-  <main class="container" id='react'></main>
-
-
-  <footer>
-    <div>&copy; 2018 hjf</div>
-    <div>
-      <a href="https://github.com/hjfitz">git</a>
-      <span class="seperator">|</span>
-      <a href="https://www.linkedin.com/in/harry-fitzgerald-454187138/">linkedin</a>
-    </div>
-  </footer>
-                  
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora|Source+Sans+Pro:400,600|Ubuntu+Mono">
     
-<script src="main.js"></script>
-</body>
+    <!-- needed because lolnobundler -->
+    <script defer src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script defer src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.9/marked.min.js"></script>
+    <script defer src="main.js"></script>
+
+    <!-- service worker magic -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/sw.js', { scope: '/' })
+          .then(reg => console.log('Registration succeeded. Scope is ' + reg.scope))
+          .catch(err => console.log('Registration failed with ' + err));
+      }
+    </script>
+
+  <body>
+
+      <header><h1>Bloggo</h1></header>
+
+
+      <main class="container" id='react'></main>
+
+
+      <footer>
+        <div>&copy; 2018 hjf</div>
+        <div>
+          <a href="https://github.com/hjfitz">git</a>
+          <span class="seperator">|</span>
+          <a href="https://www.linkedin.com/in/harry-fitzgerald-454187138/">linkedin</a>
+        </div>
+      </footer>
+                  
+  </body>
 </html>
