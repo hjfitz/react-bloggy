@@ -5,8 +5,8 @@
   "background_color": "#263238",
   "display": "standalone",
   "orientation": "portrait",
-  "Scope": "/",
-  "start_url": "/",
+  "Scope": "/react-bloggy",
+  "start_url": "/react-bloggy",
   "icons": [
     {
       "src": "images/icons/icon-72x72.png",
