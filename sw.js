@@ -1,11 +1,12 @@
 // change this
-const cacheName = 'react-bloggy-1';
+const cacheName = 'react-bloggy-2';
 
 // on *, app.js serves our index file
 // we can be lazy and request /index.html
 // this gets redirected to our layout file
 const toCache = [
   '/',
+  '/react-bloggy',
   // our assets
   '/react-bloggy/main.js',
   '/react-bloggy/style.css',
