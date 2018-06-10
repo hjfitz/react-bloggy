@@ -5,6 +5,7 @@ const cacheName = 'react-bloggy-1';
 // we can be lazy and request /index.html
 // this gets redirected to our layout file
 const toCache = [
+  '/',
   // our assets
   '/react-bloggy/main.js',
   '/react-bloggy/style.css',
