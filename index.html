@@ -25,7 +25,7 @@
     <!-- service worker magic -->
     <script>
       if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('/sw.js', { scope: '/' })
+        navigator.serviceWorker.register('/react-bloggy/sw.js', { scope: '/react-bloggy' })
           .then(reg => console.log('Registration succeeded. Scope is ' + reg.scope))
           .catch(err => console.log('Registration failed with ' + err));
       }
