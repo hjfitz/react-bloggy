@@ -6,8 +6,8 @@ const cacheName = 'react-bloggy-1';
 // this gets redirected to our layout file
 const toCache = [
   // our assets
-  '/main.js',
-  '/style.css',
+  '/react-bloggy/main.js',
+  '/react-bloggy/style.css',
   // external assets
   'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/arta.min.css',
   'https://unpkg.com/react@16/umd/react.development.js',
