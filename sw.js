@@ -1,5 +1,5 @@
 // change this
-const cacheName = 'react-bloggy-3';
+const cacheName = 'react-bloggy-6';
 
 // on *, app.js serves our index file
 // we can be lazy and request /index.html
@@ -8,11 +8,11 @@ const toCache = [
   '/react-bloggy',
   // our assets
   '/react-bloggy/main.js',
-  '/react-bloggy/style.css',
+  // '/react-bloggy/style.css',
   // external assets
   'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/arta.min.css',
-  'https://unpkg.com/react@16/umd/react.development.js',
-  'https://unpkg.com/react-dom@16/umd/react-dom.development.js',
+  'https://unpkg.com/react@16.0.0/umd/react.production.min.js',
+  'https://unpkg.com/react-dom@16.0.0/umd/react-dom.production.min.js',
   'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js',
   'https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.9/marked.min.js',
 ];
