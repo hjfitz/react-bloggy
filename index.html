@@ -8,20 +8,6 @@
 <body>
 	<h1>rebooting sky router..</h1>
 	<p class="status">rebooting...</p>
-	<p class="resp"></p>
-	<script>
-		(async function() {
-			const p = document.querySelector('.status')
-			const routerresp = document.querySelector('.resp')
-			try {
-				const resp = await fetch('http://192.168.0.1/sky_self_heal_reboot.cgi').then(r => r.text())
-				p.textContent = 'rebooted!'
-				routerresp.textContent = resp
-			} catch (err) {
-				p.textContent = 'error - you might not be with sky'
-				routerresp.textContent = err
-			}
-		})()
-	</script>
+	<iframe src=" http://192.168.0.1/sky_self_heal_reboot.cgi" frameborder="0"></iframe>
 </body>
 </html>
