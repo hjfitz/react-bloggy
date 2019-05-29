@@ -1,166 +1,27 @@
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-
-    <!-- pwa stuff -->
-    <meta name="theme-color" content="#263238"/>
-    <link rel="manifest" href="manifest.json" />
-
-
-    <meta name="Description" content="Author: H.J. Fitzgerald, Category: Blog, Length: variable" />
-
-
-    <title>Bloggy</title>
-
-    <!-- stylesheets -->
-    <!-- <link rel="stylesheet" href="style.css">      -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/arta.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora|Source+Sans+Pro:400,600|Ubuntu+Mono">
-    
-    <!-- needed because lolnobundler -->
-    <script defer src="https://unpkg.com/react@16.0.0/umd/react.production.min.js"></script>
-    <script defer src="https://unpkg.com/react-dom@16.0.0/umd/react-dom.production.min.js"></script>
-    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.9/marked.min.js"></script>
-    <script defer src="main.js"></script>
-
-    <!-- service worker magic -->
-    <script>
-      if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('/react-bloggy/sw.js', { scope: '/react-bloggy/' })
-          .then(reg => console.log('Registration succeeded. Scope is ' + reg.scope))
-          .catch(err => console.log('Registration failed with ' + err));
-      }
-    </script>
-
-    <style>
-      :root {
-        --sans:  'Source Sans Pro', sans-serif;
-        --mono:  'Ubuntu Mono', monospace;
-        --serif: 'Lora', serif;
-        --accent: #cfd8dc;
-        --hyper: #00695c;
-        --text: #212121;
-      }
-
-      body {
-        display: flex;
-        flex-direction: column;
-        margin: 0;
-        font-family: var(--sans);
-        color: var(--text);
-      }
-
-      pre {
-        border-left: solid 5px #6644aa;
-      }
-
-      main {
-        flex: 1 1 auto;
-        display: flex;
-        flex-direction: column;
-        margin: 0 auto;
-        max-width: 70%;
-        width: 70%;
-      }
-
-      a, a:visited {
-        color: var(--hyper);
-        text-decoration: none;
-      }
-
-      footer {
-        display: flex;
-        justify-content: space-between;
-      }
-
-      header, footer {
-        margin: 1% 5%;
-      }
-
-      main > article {
-        flex: 1 1 auto;
-      }
-
-      article * {
-        font-family: var(--serif);
-      }
-
-      article p {
-        font-size: 16px;
-      }
-
-      article img {
-        cursor: zoom-in;
-      }
-
-      article code, article code * {
-        font-family: var(--mono);
-      }
-
-      .blog-header {
-        font-weight: 600;
-      }
-
-
-      .image-modal {
-        position: fixed;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        left: 0;
-        top: 0;
-        height: 100vh;
-        width: 100vw;
-        background-color: rgba(0,0,0,0.6);
-      }
-
-      .image-modal > img {
-        max-width: 90vw;
-      }
-
-      article h1, article h2, article h3 {
-        font-family: var(--sans);
-        border-bottom: 1px solid var(--accent);
-        width: fit-content;
-      }
-
-      ::selection {
-        background: var(--accent);
-      }
-
-      img {
-        max-width: 100%;
-        display: block;
-        margin: 0 auto;
-      }
-
-      @media screen and (max-width: 560px) {
-        main {
-          max-width: 85%;
-          width: 85%;
-        }
-      }
-    </style>
-
-  <body>
-
-      <header><h1>Bloggo</h1></header>
-
-
-      <main class="container" id='react'></main>
-
-
-      <footer>
-        <div>&copy; 2018 hjf</div>
-        <div>
-          <a href="https://github.com/hjfitz">git</a>
-          <span class="seperator">|</span>
-          <a href="https://www.linkedin.com/in/harry-fitzgerald-454187138/">linkedin</a>
-        </div>
-      </footer>
-                  
-  </body>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Sky reboot</title>
+</head>
+<body>
+	<h1>rebooting sky router..</h1>
+	<p class="status">rebooting...</p>
+	<p class="resp"></p>
+	<script>
+		(async function() {
+			const p = document.querySelector('.status')
+			const routerresp = document.querySelector('.resp')
+			try {
+				const resp = await fetch('http://192.168.0.1/sky_self_heal_reboot.cgi').then(r => r.text())
+				p.textContent = 'rebooted!'
+				routerresp.textContent = resp
+			} catch (err) {
+				p.textContent = 'error - you might not be with sky'
+				routerresp.textContent = err
+			}
+		})()
+	</script>
+</body>
 </html>
